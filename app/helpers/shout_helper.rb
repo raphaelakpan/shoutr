@@ -1,5 +1,7 @@
 module ShoutHelper
   def like_button(shout)
+    return if current_user.id == shout.user.id
+
     if current_user.liked?(shout)
       link_to "Unlike", unlike_shout_path(shout), method: :delete
     else
