@@ -1,11 +1,11 @@
 class UsersController < Clearance::UsersController
+  before_action :set_user, only: [:show]
 
   def new
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
     @shouts = @user.shouts
   end
 
@@ -13,5 +13,9 @@ class UsersController < Clearance::UsersController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def set_user
+    @user = User.find_by(username: params[:id])
   end
 end
