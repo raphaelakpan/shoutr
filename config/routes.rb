@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :show] do
     resource :password, controller: "clearance/passwords", only: [:create, :edit, :update]
+    resources :followers, only: [:index]
     member do
       post "follow", to: "followed_users#create"
       delete "unfollow", to: "followed_users#destroy"

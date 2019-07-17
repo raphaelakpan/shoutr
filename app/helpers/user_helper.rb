@@ -6,12 +6,18 @@ module UserHelper
   end
 
   def follow_button(user)
-    return if current_user.id == user.id
+    return if same_user_or_guest?(user)
 
     if current_user.following? user
       button_to "Unfollow", unfollow_user_path(user), method: :delete
     else
       button_to "Follow", follow_user_path(user)
     end
+  end
+
+  private
+
+  def same_user_or_guest?(user)
+    current_user.id == user.id || current_user.is_a?(Guest)
   end
 end
