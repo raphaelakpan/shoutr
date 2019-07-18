@@ -6,7 +6,7 @@ class UsersController < Clearance::UsersController
   end
 
   def show
-    @shouts = @user.shouts
+    @timeline = Timeline.new([@user.id])
   end
 
   private
