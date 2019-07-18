@@ -1,4 +1,12 @@
 module ShoutHelper
+
+  def shout_form_for(content_type)
+    form_for(Shout.new, url: content_type.new) do |form|
+      form.fields_for(:content) { |content_form| yield(content_form) } +
+      form.submit("Shout")
+    end
+  end
+
   def like_button(shout)
     return if current_user.id == shout.user.id
 
